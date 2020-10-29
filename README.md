@@ -75,3 +75,8 @@ width="130%;"
 />
 
 A random forest classifier has been applied to the word embeddings resulting in an average cross validation score of 79% approximately.
+
+## Next steps
+* Improve sentiment classification using deep learning
+* Perform topic identification and analyze topics' frequency and effect of sentiment to uncover elements impacting the consumers' experience 
+
