@@ -3,7 +3,7 @@
 Created on Tue Oct 27 16:35:15 2020
 
 In this script the books review from [1] are used as a corpus to extract word 
-embeddings using a Continuous Bag Of Words CBOF model.
+embeddings using a Continuous Bag Of Words CBOW model.
 
 Only reviews with 5-star rating and 1-star rating are used in this project.
 
@@ -11,13 +11,11 @@ The CBOW model is implemented from scratch.
 
 The resulting word embeddings are visualised in a 2D plot using the first two 
 Principal Components. Interesting relationships between words can be observed 
-in this plot. Some examples are:
-    - words 'lack' and 'take' are at opposite extremes of PC2
-    - some words stems appear close together in the map, such as:
-        - 'research' & 'idea'
-        - 'cook' & 'enjoy'
-        - 'beauti' & 'sens'
-        - 'relationship' & 'social'
+in this plot. Words with similar meaning or connotation will be closer in the 
+graph.
+
+Finally, the generated word embeddings are used for sentiment classification
+using a random forest model. The model results in a mean accuracy of 79.2%.
         
 @author: Marina Torrente Rodriguez
 
@@ -53,7 +51,7 @@ reviews_neg = get_reviews_dictionary(file_negative)
 file_negative.close()   
 
 # Get list of unique words from positive and negative vocabularies
-min_freq = 5 # minimum frequency filer
+min_freq = 50 # minimum frequency filer
 vocab = get_list_of_words(get_vocab_freqs(reviews_pos, 1), list(), min_freq)
 vocab = get_list_of_words(get_vocab_freqs(reviews_neg, 0), vocab, min_freq)
 
@@ -252,14 +250,14 @@ for i, review in enumerate(all_reviews):
     sum_vector[i,:] = np.sum(vector, axis=0).T
 
 # Classification model using extreme gradient boosting (XGBoost)
-from xgboost import XGBClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import RepeatedStratifiedKFold
 
-# XBG model
-model = XGBClassifier(objective='binary:logistic', booster='gbtree')
+# Random Forest model
+model = RandomForestClassifier(n_estimators=100)
 cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
 scores = cross_val_score(model, sum_vector, y, scoring='accuracy', cv=cv, n_jobs=-1, error_score='raise')
-print("XGBoost model mean accuracy: {}".format(scores.mean()))
+print("Random Forest model mean accuracy: {}".format(scores.mean()))
 
 
