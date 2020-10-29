@@ -38,13 +38,13 @@ from SA_utils import get_all_reviews
 from sklearn.model_selection import train_test_split 
 
 # Get positive reviews stored in a dictionary
-file_name_pos = os.getcwd() + "/books/positive.review"
+file_name_pos = os.getcwd() + "/positive.review"
 file_positive = open(file_name_pos, "r")
 reviews_pos = get_reviews_dictionary(file_positive)
 file_positive.close()   
 
 # Get negative reviews stored in a dictionary
-file_name_neg = os.getcwd() + "/books/negative.review"
+file_name_neg = os.getcwd() + "/negative.review"
 file_negative = open(file_name_neg, "r")
 reviews_neg = get_reviews_dictionary(file_negative)
 file_negative.close()   
