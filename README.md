@@ -27,3 +27,8 @@ The structure of the project is organized as follows:
 
 Each of the NLP techniques used in this project is further explained in the following sections.
 
+## 1) Sentiment classifier with Logistic Regression
+To implement the logistic regression classifier first a vocabulary containing all the different words that appear in the pre-processed reviews is built.
+Then, for each word in the vocabulary, features characterising this word are extracted. The word features consist of a bias term with value of 1, followed by the frequency of the word in positive reveiws and finally the frequency of the word in negative reviews.
+
+The word features are show in 
