@@ -27,8 +27,36 @@ The structure of the project is organized as follows:
 
 Each of the NLP techniques used in this project is further explained in the following sections.
 
-## 1) Sentiment classifier with Logistic Regression
+## 1) Logistic Regression classifier
 To implement the logistic regression classifier first a vocabulary containing all the different words that appear in the pre-processed reviews is built.
 Then, for each word in the vocabulary, features characterising this word are extracted. The word features consist of a bias term with value of 1, followed by the frequency of the word in positive reveiws and finally the frequency of the word in negative reviews.
 
-The word features are show in 
+The word features are show in for the books reviews are illustrated below, showin the positive word features in green and the negative one in red. It is seen that the green points overlap with the red ones, which indicated that the classification is not straightforward. 
+
+<img
+src="Plot_Word_features.png"
+raw=true
+alt="Word features"
+style="margin-right: 10px;"
+/>
+
+A logistic regresion classifier is implements using gradient descent. The model results in an accuracy of 83.6% approximately.
+
+## 2) Naive Bayes classifier
+The naive bayes classifier is based on the probability of the words appearing in a positive or negative review.
+Laplacian smoothing has been applied to avoid instability issues.
+
+The "positivity" of "negativity" of each word can be measured by the logarithmic ratio between the positive and negative probabilities of each word. Positive words will have a larger logarithmic positive value, whereas negetive words will result in a lerger negative value of the logarithmic ratio.
+The "positivity" of "negativity" of the words is visualised against their logarithmic frequency, as shown in the graoh below. This informs of the most frequency used positive and negative words.
+
+<img
+src="Plot_Words_probability_ratio.png"
+raw=true
+alt="Word ratio"
+style="margin-right: 10px;"
+/>
+
+
+
+
+
